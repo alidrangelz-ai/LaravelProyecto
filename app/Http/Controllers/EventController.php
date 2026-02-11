@@ -10,7 +10,8 @@ class EventController extends Controller
     public function index()
     {
         return \Inertia\Inertia::render('Events/Index', [
-            'events' => auth()->user()->events()->latest()->get()
+            'events' => auth()->user()->events()->latest()->get(),
+            'tasks' => auth()->user()->tasks()->latest()->get()
         ]);
     }
 
@@ -21,7 +22,8 @@ class EventController extends Controller
             'description' => 'nullable|string',
             'event_date' => 'required|date',
             'location' => 'nullable|string|max:255',
-            'type' => 'required|string'
+            'type' => 'required|string',
+            'is_priority' => 'boolean'
         ]);
 
         $request->user()->events()->create($validated);
@@ -38,7 +40,8 @@ class EventController extends Controller
             'description' => 'nullable|string',
             'event_date' => 'required|date',
             'location' => 'nullable|string|max:255',
-            'type' => 'required|string'
+            'type' => 'required|string',
+            'is_priority' => 'boolean'
         ]);
 
         $event->update($validated);

@@ -14,7 +14,8 @@ class TaskController extends Controller
     public function index()
     {
         return Inertia::render('Tasks/Index', [
-            'tasks' => Task::where('user_id', auth()->id())->latest()->get()
+            'tasks' => Task::where('user_id', auth()->id())->latest()->get(),
+            'events' => \App\Models\Event::where('user_id', auth()->id())->get()
         ]);
     }
 
@@ -27,7 +28,8 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'due_date' => 'nullable|date',
-            'is_completed' => 'boolean'
+            'is_completed' => 'boolean',
+            'is_priority' => 'boolean'
         ]);
 
         $request->user()->tasks()->create($validated);
@@ -62,7 +64,8 @@ class TaskController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'due_date' => 'nullable|date',
-            'is_completed' => 'boolean'
+            'is_completed' => 'boolean',
+            'is_priority' => 'boolean'
         ]);
 
         $task->update($validated);

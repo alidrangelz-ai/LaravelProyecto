@@ -15,10 +15,20 @@ Este proyecto es una aplicación web de gestión personal moderna y minimalista,
 - Interfaz limpia con fondos blancos suaves, bordes muy redondeados (`rounded-[2rem]`), sombras sutiles y tipografía optimizada para lectura prolongada.
 - Navegación **Sidebar fija** en escritorio para un flujo de trabajo profesional y cabecera colapsable moderna en móviles.
 
+### 📌 Agenda Personal & Prioridades (NUEVO)
+- **Integración Dual**: Unificación de Eventos y Tareas en un solo módulo de "Agenda Personal" con navegación por pestañas.
+- **Sistema de Prioridades (🔥)**: Marcado de elementos críticos que se visualizan automáticamente en una "Hot List" destacada en el Menú Principal.
+- **Filtrado por Rango de Fechas**: Panel avanzado para segmentar eventos y tareas por fechas específicas, optimizando la planificación temporal.
+- **Edición Avanzada**: Flujo mejorado para la gestión de tareas existentes y cambio de estados.
+
+### 🌸 Decoración Estacional Dinámica
+- El Calendario ahora reacciona al mes actual con **Temas Estacionales** (Invierno, Primavera, Verano, Otoño).
+- Fondos animados con iconos estacionales flotantes en baja opacidad para una experiencia inmersiva.
+- Micro-animaciones y gradientes de color que cambian suavemente al navegar entre meses.
+
 ### 🌗 Modo Oscuro Nativo
 - Sistema de temas (Claro/Oscuro) integrado con persistencia en el navegador (`localStorage`).
-- Transiciones suaves entre temas y soporte completo en todos los módulos (Dashboard, Notas, Calendario, Eventos, Ajustes).
-- Inyección temprana de script en `app.blade.php` para evitar el parpadeo blanco al cargar la página.
+- Soporte completo en todos los nuevos módulos y componentes visuales.
 
 ### ⚙️ Preferencias y Navegación
 - **Menú Principal**: El Dashboard ha sido renombrado a "Menú Principal" para una navegación más intuitiva.

@@ -15,7 +15,12 @@ class Event extends Model
         'description',
         'event_date',
         'location',
-        'type'
+        'type',
+        'is_priority'
+    ];
+
+    protected $casts = [
+        'is_priority' => 'boolean'
     ];
 
     public function user()

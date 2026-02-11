@@ -19,7 +19,18 @@ class DashboardController extends Controller
         ];
 
         return Inertia::render('Dashboard', [
-            'stats' => $stats
+            'stats' => $stats,
+            'priority_items' => [
+                'events' => \App\Models\Event::where('user_id', auth()->id())
+                    ->where('is_priority', true)
+                    ->orderBy('event_date', 'asc')
+                    ->get(),
+                'tasks' => Task::where('user_id', auth()->id())
+                    ->where('is_priority', true)
+                    ->where('is_completed', false)
+                    ->orderBy('due_date', 'asc')
+                    ->get(),
+            ]
         ]);
     }
 }

@@ -41,7 +41,7 @@
 ## Estado del Proyecto y Tecnologías
 
 ### Arquitectura
-- **Backend**: Laravel 10 con SQLite (persistencia garantizada y cero configuración externa).
+- **Backend**: Laravel 10 con SQLite 
 - **Frontend**: Vue.js 3 (Composition API) + Inertia.js (SPA feel).
 - **Estilos**: Tailwind CSS 3 con componentes reutilizables (`card-white`, `btn-primary`, `input-friendly`).
 

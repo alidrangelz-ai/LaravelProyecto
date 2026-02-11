@@ -1,41 +1,40 @@
-# BlocApp - Bloc de Notas Boutique (Laravel + Vue + Inertia)
+# BlocApp 
 
-Este proyecto es una aplicación web de gestión personal moderna y minimalista, desarrollada con **Laravel 10**, **Vue.js 3**, **Inertia.js** y **Tailwind CSS**. Se enfoca en una experiencia de usuario fluida con una estética "Boutique White".
 
-## ✨ Características Recientes
+## reciente
 
-### 📅 Módulo de Eventos (NUEVO)
+###  Módulo de Eventos
 - Se ha implementado un completo gestor de **Eventos** con soporte para:
     - Categorización (Reunión, Personal, Trabajo, Importante).
     - Seguimiento de ubicación y descripciones detalladas.
     - Interfaz de tarjetas moderna con soporte para Modo Oscuro.
     - Seguridad integrada mediante `Policies` para proteger la privacidad del usuario.
 
-### 🎨 Estética "Boutique White"
+### Estética 
 - Interfaz limpia con fondos blancos suaves, bordes muy redondeados (`rounded-[2rem]`), sombras sutiles y tipografía optimizada para lectura prolongada.
 - Navegación **Sidebar fija** en escritorio para un flujo de trabajo profesional y cabecera colapsable moderna en móviles.
 
-### 📌 Agenda Personal & Prioridades (NUEVO)
+### Agenda Personal & Prioridades
 - **Integración Dual**: Unificación de Eventos y Tareas en un solo módulo de "Agenda Personal" con navegación por pestañas.
 - **Sistema de Prioridades (🔥)**: Marcado de elementos críticos que se visualizan automáticamente en una "Hot List" destacada en el Menú Principal.
 - **Filtrado por Rango de Fechas**: Panel avanzado para segmentar eventos y tareas por fechas específicas, optimizando la planificación temporal.
 - **Edición Avanzada**: Flujo mejorado para la gestión de tareas existentes y cambio de estados.
 
-### 🌸 Decoración Estacional Dinámica
+### Decoración Estacional Dinámica
 - El Calendario ahora reacciona al mes actual con **Temas Estacionales** (Invierno, Primavera, Verano, Otoño).
 - Fondos animados con iconos estacionales flotantes en baja opacidad para una experiencia inmersiva.
 - Micro-animaciones y gradientes de color que cambian suavemente al navegar entre meses.
 
-### 🌗 Modo Oscuro Nativo
+### Modo Oscuro Nativo
 - Sistema de temas (Claro/Oscuro) integrado con persistencia en el navegador (`localStorage`).
 - Soporte completo en todos los nuevos módulos y componentes visuales.
 
-### ⚙️ Preferencias y Navegación
+### Preferencias y Navegación
 - **Menú Principal**: El Dashboard ha sido renombrado a "Menú Principal" para una navegación más intuitiva.
 * **Ajustes Dinámicos**: Configuración funcional del título del sitio que se refleja automáticamente en toda la interfaz.
 - **Gestión de Usuario**: Acceso al perfil y cierre de sesión centralizado en el módulo de Ajustes.
 
-## 📦 Estado del Proyecto y Tecnologías
+## Estado del Proyecto y Tecnologías
 
 ### Arquitectura
 - **Backend**: Laravel 10 con SQLite (persistencia garantizada y cero configuración externa).
@@ -49,7 +48,7 @@ Este proyecto es una aplicación web de gestión personal moderna y minimalista,
 4.  **Eventos**: Agenda personal con categorización y ubicaciones.
 5.  **Ajustes**: Centro de control para apariencia, datos del sitio y cuenta de usuario.
 
-## 🚀 Instalación y Uso
+## Instalación y Uso
 
 1.  **Clonar y configurar**:
     ```bash

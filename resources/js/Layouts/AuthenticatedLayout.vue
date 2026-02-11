@@ -19,7 +19,9 @@ const showingNavigationDropdown = ref(false);
                     <div class="bg-indigo-600 p-2.5 rounded-2xl shadow-lg shadow-indigo-100 dark:shadow-none group-hover:scale-110 transition-transform">
                         <ApplicationLogo class="block h-7 w-auto fill-current text-white" />
                     </div>
-                    <span class="text-xl font-black text-slate-900 dark:text-white tracking-tight">BlocApp</span>
+                    <span class="text-xl font-black text-slate-900 dark:text-white tracking-tight">
+                        {{ $page.props.settings['site_title']?.value || 'BlocApp' }}
+                    </span>
                 </Link>
             </div>
 
@@ -28,7 +30,7 @@ const showingNavigationDropdown = ref(false);
                     class="flex items-center gap-3 px-5 py-4 rounded-2xl font-bold transition-all group"
                     :class="route().current('dashboard') ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'">
                     <span class="text-xl group-hover:scale-110 transition-transform">🏠</span>
-                    Dashboard
+                    Menú Principal
                 </Link>
 
                 <Link :href="route('notes.index')" 
@@ -43,6 +45,13 @@ const showingNavigationDropdown = ref(false);
                     :class="route().current('tasks.*') ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'">
                     <span class="text-xl group-hover:scale-110 transition-transform">📅</span>
                     Calendario
+                </Link>
+
+                <Link :href="route('events.index')" 
+                    class="flex items-center gap-3 px-5 py-4 rounded-2xl font-bold transition-all group"
+                    :class="route().current('events.*') ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'">
+                    <span class="text-xl group-hover:scale-110 transition-transform">🎉</span>
+                    Eventos
                 </Link>
 
                 <Link :href="route('settings.index')" 
@@ -78,9 +87,10 @@ const showingNavigationDropdown = ref(false);
 
                 <div v-show="showingNavigationDropdown" class="border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
                     <div class="p-4 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">Dashboard</ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">Menú Principal</ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('notes.index')" :active="route().current('notes.*')">Notas Rápidas</ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('tasks.index')" :active="route().current('tasks.*')">Calendario</ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('events.index')" :active="route().current('events.*')">Eventos</ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('settings.index')" :active="route().current('settings.*')">Ajustes</ResponsiveNavLink>
                     </div>
                     <div class="p-4 border-t border-slate-100 dark:border-slate-800">

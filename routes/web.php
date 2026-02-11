@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     // Modules
     Route::resource('notes', App\Http\Controllers\NoteController::class);
     Route::resource('tasks', App\Http\Controllers\TaskController::class);
+    Route::resource('events', App\Http\Controllers\EventController::class);
     Route::resource('settings', App\Http\Controllers\SettingController::class)->only(['index', 'store']);
 });
 

@@ -34,6 +34,9 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'settings' => $request->user() 
+                ? \App\Models\Setting::where('user_id', $request->user()->id)->get()->keyBy('key')
+                : [],
         ];
     }
 }

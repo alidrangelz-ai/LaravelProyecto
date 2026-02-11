@@ -12,9 +12,7 @@ const props = defineProps({
 
 const form = useForm({
     settings: [
-        { key: 'site_title', value: props.settings['site_title']?.value || 'Mi Bloc de Notas', label: 'Título del Sitio' },
-        { key: 'theme_color', value: props.settings['theme_color']?.value || 'blue', label: 'Color Principal' },
-        { key: 'items_per_page', value: props.settings['items_per_page']?.value || '10', label: 'Items por Página' },
+        { key: 'site_title', value: props.settings['site_title']?.value || 'BlocApp', label: 'Título del Sitio' },
     ]
 });
 

@@ -130,9 +130,58 @@ const form = useForm({
 });
 
 const showModal = ref(false);
+const showEventModal = ref(false);
 const showDayDetailsModal = ref(false);
 const selectedDay = ref(null);
 const editingTask = ref(null);
+const editingEvent = ref(null);
+
+const eventForm = useForm({
+    title: '',
+    description: '',
+    event_date: '',
+    location: '',
+    type: 'general',
+    is_priority: false
+});
+
+const openEventModal = (event = null, dateStr = null) => {
+    if (event) {
+        editingEvent.value = event;
+        eventForm.title = event.title;
+        eventForm.description = event.description;
+        eventForm.event_date = event.event_date ? event.event_date.substring(0, 16) : '';
+        eventForm.location = event.location;
+        eventForm.type = event.type;
+        eventForm.is_priority = event.is_priority;
+    } else {
+        editingEvent.value = null;
+        eventForm.reset();
+        if (dateStr) {
+            // Pre-fill date from calendar click (setting to noon by default)
+            eventForm.event_date = `${dateStr}T12:00`;
+        }
+    }
+    showEventModal.value = true;
+};
+
+const closeEventModal = () => {
+    showEventModal.value = false;
+    eventForm.reset();
+    editingEvent.value = null;
+};
+
+const submitEvent = () => {
+    if (editingEvent.value) {
+        eventForm.put(route('events.update', editingEvent.value.id), {
+            onSuccess: () => closeEventModal(),
+        });
+    } else {
+        eventForm.post(route('events.store'), {
+            onSuccess: () => closeEventModal(),
+        });
+    }
+};
 
 const openDayDetails = (dayObj) => {
     if (!dayObj.day) return;
@@ -332,6 +381,20 @@ const deleteTask = () => {
                         </button>
                     </div>
 
+                    <!-- Botones de Acción Rápida -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <button @click="() => { showDayDetailsModal = false; openModal(null, selectedDay.date); }" 
+                            class="flex items-center justify-center gap-2 p-4 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 font-bold hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-all border border-indigo-100 dark:border-indigo-800">
+                            <span class="text-xl">📌</span>
+                            Añadir Tarea
+                        </button>
+                        <button @click="() => { showDayDetailsModal = false; openEventModal(null, selectedDay.date); }" 
+                            class="flex items-center justify-center gap-2 p-4 rounded-2xl bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 font-bold hover:bg-amber-100 dark:hover:bg-amber-900/50 transition-all border border-amber-100 dark:border-amber-800">
+                            <span class="text-xl">🎉</span>
+                            Añadir Evento
+                        </button>
+                    </div>
+
                     <!-- Holidays Section -->
                     <div v-if="selectedDay.holidays?.length" class="space-y-4">
                         <div v-for="holiday in selectedDay.holidays" :key="holiday.name"
@@ -399,6 +462,115 @@ const deleteTask = () => {
                             No hay tareas programadas.
                         </div>
                     </div>
+                </div>
+            </div>
+        </Modal>
+
+        <!-- Task Modal -->
+        <Modal :show="showModal" @close="closeModal">
+            <div class="p-8 dark:bg-slate-950">
+                <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-8">
+                    {{ editingTask ? 'Editar Tarea' : 'Nueva Tarea desde Calendario' }}
+                </h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <InputLabel for="task_title" value="Título de la Tarea" class="text-slate-700 dark:text-slate-300 font-bold mb-2 uppercase text-xs tracking-widest" />
+                        <TextInput id="task_title" v-model="form.title" type="text" 
+                            class="input-friendly w-full py-3 placeholder:text-slate-400" 
+                            placeholder="¿Qué tienes pendiente?" autofocus />
+                    </div>
+
+                    <div>
+                        <InputLabel for="task_due_date" value="Fecha Límite" class="text-slate-700 dark:text-slate-300 font-bold mb-2 uppercase text-xs tracking-widest" />
+                        <TextInput id="task_due_date" v-model="form.due_date" type="datetime-local" 
+                            class="input-friendly w-full py-3" />
+                    </div>
+
+                    <div>
+                        <InputLabel for="task_description" value="Descripción" class="text-slate-700 dark:text-slate-300 font-bold mb-2 uppercase text-xs tracking-widest" />
+                        <textarea id="task_description" v-model="form.description" 
+                            class="input-friendly w-full py-3 placeholder:text-slate-400 min-h-[100px]" 
+                            placeholder="Detalles de la tarea..."></textarea>
+                    </div>
+
+                    <div class="flex items-center gap-3 p-4 bg-rose-50/50 dark:bg-rose-900/10 rounded-2xl border border-rose-100 dark:border-rose-800/50 cursor-pointer" @click="form.is_priority = !form.is_priority">
+                        <Checkbox v-model:checked="form.is_priority" class="w-5 h-5" />
+                        <div>
+                            <p class="text-sm font-black text-rose-700 dark:text-rose-400 uppercase tracking-widest">Marcar como Prioritario</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex gap-4">
+                    <SecondaryButton @click="closeModal" class="flex-1 justify-center py-4 rounded-2xl"> 
+                        Cancelar 
+                    </SecondaryButton>
+                    <PrimaryButton class="flex-1 justify-center py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 shadow-indigo-200" 
+                        :disabled="form.processing" @click="submit">
+                        {{ editingTask ? 'Actualizar' : 'Crear Tarea' }}
+                    </PrimaryButton>
+                </div>
+            </div>
+        </Modal>
+
+        <!-- Event Modal (Shortcut) -->
+        <Modal :show="showEventModal" @close="closeEventModal">
+            <div class="p-8 dark:bg-slate-950">
+                <h2 class="text-2xl font-black text-slate-900 dark:text-white mb-8">
+                    {{ editingEvent ? 'Editar Evento' : 'Nuevo Evento desde Calendario' }}
+                </h2>
+
+                <div class="space-y-6">
+                    <div>
+                        <InputLabel for="event_title" value="Título" class="text-slate-700 dark:text-slate-300 font-bold mb-2 uppercase text-xs tracking-widest" />
+                        <TextInput id="event_title" v-model="eventForm.title" type="text" 
+                            class="input-friendly w-full py-3 placeholder:text-slate-400" 
+                            placeholder="Nombre del evento" autofocus />
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <InputLabel for="event_date_modal" value="Fecha y Hora" class="text-slate-700 dark:text-slate-300 font-bold mb-2 uppercase text-xs tracking-widest" />
+                            <TextInput id="event_date_modal" v-model="eventForm.event_date" type="datetime-local" 
+                                class="input-friendly w-full py-3" />
+                        </div>
+                        <div>
+                            <InputLabel for="event_type" value="Categoría" class="text-slate-700 dark:text-slate-300 font-bold mb-2 uppercase text-xs tracking-widest" />
+                            <select id="event_type" v-model="eventForm.type" 
+                                class="input-friendly w-full py-3 dark:bg-slate-800 dark:text-white">
+                                <option value="general">General</option>
+                                <option value="reunion">Reunión</option>
+                                <option value="personal">Personal</option>
+                                <option value="trabajo">Trabajo</option>
+                                <option value="importante">Importante</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <InputLabel for="event_location" value="Ubicación" class="text-slate-700 dark:text-slate-300 font-bold mb-2 uppercase text-xs tracking-widest" />
+                        <TextInput id="event_location" v-model="eventForm.location" type="text" 
+                            class="input-friendly w-full py-3 placeholder:text-slate-400" 
+                            placeholder="¿Dónde será?" />
+                    </div>
+
+                    <div class="flex items-center gap-3 p-4 bg-rose-50/50 dark:bg-rose-900/10 rounded-2xl border border-rose-100 dark:border-rose-800/50 cursor-pointer" @click="eventForm.is_priority = !eventForm.is_priority">
+                        <input type="checkbox" v-model="eventForm.is_priority" class="w-5 h-5 rounded border-rose-300 text-rose-600 focus:ring-rose-500" />
+                        <div>
+                            <p class="text-sm font-black text-rose-700 dark:text-rose-400 uppercase tracking-widest">Prioridad Alta</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex gap-4">
+                    <SecondaryButton @click="closeEventModal" class="flex-1 justify-center py-4 rounded-2xl"> 
+                        Cancelar 
+                    </SecondaryButton>
+                    <PrimaryButton class="flex-1 justify-center py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-700 shadow-indigo-200" 
+                        :disabled="eventForm.processing" @click="submitEvent">
+                        {{ editingEvent ? 'Actualizar' : 'Crear Evento' }}
+                    </PrimaryButton>
                 </div>
             </div>
         </Modal>

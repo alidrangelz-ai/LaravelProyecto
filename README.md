@@ -31,9 +31,14 @@ Este proyecto es una aplicación web de gestión personal moderna y minimalista,
 - Soporte completo en todos los nuevos módulos y componentes visuales.
 
 ### ⚙️ Preferencias y Navegación
-- **Menú Principal**: El Dashboard ha sido renombrado a "Menú Principal" para una navegación más intuitiva.
+- **Navegación Optimizada**: Se ha reordenado el menú principal para priorizar los **Eventos** sobre el **Calendario**, facilitando el acceso a la agenda inmediata.
+- **Menú Principal**: El Dashboard funciona como centro de control con acceso a la "Hot List" de prioridades.
 * **Ajustes Dinámicos**: Configuración funcional del título del sitio que se refleja automáticamente en toda la interfaz.
 - **Gestión de Usuario**: Acceso al perfil y cierre de sesión centralizado en el módulo de Ajustes.
+
+### ⚡ Atajos de Productividad (NUEVO)
+- **Creación Rápida desde Calendario**: Al hacer clic en cualquier día del calendario, ahora puedes añadir **Tareas** o **Eventos** instantáneamente a través de atajos inteligentes que pre-completan la fecha seleccionada.
+- **Integración Total**: Los elementos creados desde el calendario se sincronizan automáticamente con sus respectivos módulos de gestión.
 
 ## 📦 Estado del Proyecto y Tecnologías
 

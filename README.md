@@ -66,5 +66,4 @@
     - Backend: `php artisan serve`
     - Frontend: `npm run dev` o `npm run build`
 
----
-*Desarrollado con ❤️ para una organización personal sin distracciones.*
+

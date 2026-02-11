@@ -13,8 +13,8 @@ defineProps({
     <AuthenticatedLayout>
         <template #header>
             <div class="flex flex-col gap-2">
-                <h2 class="font-extrabold text-4xl text-slate-900 tracking-tight">¡Hola de nuevo! ✨</h2>
-                <p class="text-slate-500 text-lg">Aquí tienes un resumen de tu actividad.</p>
+                <h2 class="font-extrabold text-4xl text-slate-900 dark:text-white tracking-tight">¡Hola de nuevo! ✨</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-lg">Aquí tienes un resumen de tu actividad.</p>
             </div>
         </template>
 
@@ -24,44 +24,44 @@ defineProps({
                     <!-- Stat 1: Total Notes -->
                     <div class="card-white group cursor-default">
                         <div class="flex flex-col">
-                            <div class="w-12 h-12 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                            <div class="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
                                 📝
                             </div>
-                            <h3 class="text-slate-500 font-medium mb-1">Mis Notas</h3>
-                            <p class="text-4xl font-black text-slate-900">{{ stats.notes_count }}</p>
+                            <h3 class="text-slate-600 dark:text-slate-400 font-bold mb-1">Mis Notas</h3>
+                            <p class="text-4xl font-black text-slate-900 dark:text-white">{{ stats.notes_count }}</p>
                         </div>
                     </div>
 
                     <!-- Stat 2: Pinned Notes -->
                     <div class="card-white group cursor-default">
                         <div class="flex flex-col">
-                            <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                            <div class="w-12 h-12 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
                                 ⭐
                             </div>
-                            <h3 class="text-slate-500 font-medium mb-1">Destacadas</h3>
-                            <p class="text-4xl font-black text-slate-900">{{ stats.pinned_notes_count }}</p>
+                            <h3 class="text-slate-600 dark:text-slate-400 font-bold mb-1">Destacadas</h3>
+                            <p class="text-4xl font-black text-slate-900 dark:text-white">{{ stats.pinned_notes_count }}</p>
                         </div>
                     </div>
 
                     <!-- Stat 3: Pending Tasks -->
                     <div class="card-white group cursor-default">
                         <div class="flex flex-col">
-                            <div class="w-12 h-12 bg-rose-50 text-rose-600 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                            <div class="w-12 h-12 bg-rose-50 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
                                 ⏳
                             </div>
-                            <h3 class="text-slate-500 font-medium mb-1">Pendientes</h3>
-                            <p class="text-4xl font-black text-slate-900">{{ stats.tasks_pending_count }}</p>
+                            <h3 class="text-slate-600 dark:text-slate-400 font-bold mb-1">Pendientes</h3>
+                            <p class="text-4xl font-black text-slate-900 dark:text-white">{{ stats.tasks_pending_count }}</p>
                         </div>
                     </div>
 
                     <!-- Stat 4: Completed Tasks -->
                     <div class="card-white group cursor-default">
                         <div class="flex flex-col">
-                            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
+                            <div class="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-2xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110">
                                 ✅
                             </div>
-                            <h3 class="text-slate-500 font-medium mb-1">Completadas</h3>
-                            <p class="text-4xl font-black text-slate-900">{{ stats.tasks_completed_count }}</p>
+                            <h3 class="text-slate-600 dark:text-slate-400 font-bold mb-1">Completadas</h3>
+                            <p class="text-4xl font-black text-slate-900 dark:text-white">{{ stats.tasks_completed_count }}</p>
                         </div>
                     </div>
                 </div>

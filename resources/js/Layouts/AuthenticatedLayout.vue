@@ -11,159 +11,101 @@ const showingNavigationDropdown = ref(false);
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-[#f8fafc]">
-            <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100">
-                <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-20">
-                        <div class="flex">
-                            <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')" class="bg-indigo-50 p-2 rounded-2xl">
-                                    <ApplicationLogo
-                                        class="block h-8 w-auto fill-current text-indigo-600"
-                                    />
-                                </Link>
-                            </div>
-
-                            <!-- Navigation Links -->
-                            <div class="hidden space-x-4 sm:-my-px sm:ms-10 sm:flex items-center">
-                                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
-                                </NavLink>
-                                <NavLink :href="route('notes.index')" :active="route().current('notes.*')">
-                                    Notas Rápidas
-                                </NavLink>
-                                <NavLink :href="route('tasks.index')" :active="route().current('tasks.*')">
-                                    Calendario
-                                </NavLink>
-                                <NavLink :href="route('settings.index')" :active="route().current('settings.*')">
-                                    Ajustes
-                                </NavLink>
-                            </div>
-                        </div>
-
-                        <div class="hidden sm:flex sm:items-center sm:ms-6">
-                            <!-- Settings Dropdown -->
-                            <div class="ms-3 relative">
-                                <Dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="inline-flex items-center px-4 py-2 border border-slate-100 text-sm leading-4 font-medium rounded-xl text-slate-600 bg-white hover:bg-slate-50 focus:outline-none transition ease-in-out duration-150 shadow-sm"
-                                            >
-                                                {{ $page.props.auth.user.name }}
-
-                                                <svg
-                                                    class="ms-2 -me-0.5 h-4 w-4 opacity-50"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
-
-                                    <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Mi Perfil </DropdownLink>
-                                        <DropdownLink :href="route('logout')" method="post" as="button" class="text-red-500">
-                                            Cerrar Sesión
-                                        </DropdownLink>
-                                    </template>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <!-- Hamburger -->
-                        <div class="-me-2 flex items-center sm:hidden">
-                            <button
-                                @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center p-2 rounded-xl text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none transition duration-150 ease-in-out"
-                            >
-                                <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                    <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex': !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex': showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
+    <div class="min-h-screen bg-[#f8fafc] dark:bg-slate-950 flex transition-colors duration-300">
+        <!-- Sidebar Desktop -->
+        <aside class="hidden md:flex flex-col w-72 bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800 sticky top-0 h-screen z-50 shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
+            <div class="p-8">
+                <Link :href="route('dashboard')" class="flex items-center gap-3 group">
+                    <div class="bg-indigo-600 p-2.5 rounded-2xl shadow-lg shadow-indigo-100 dark:shadow-none group-hover:scale-110 transition-transform">
+                        <ApplicationLogo class="block h-7 w-auto fill-current text-white" />
                     </div>
-                </div>
+                    <span class="text-xl font-black text-slate-900 dark:text-white tracking-tight">BlocApp</span>
+                </Link>
+            </div>
 
-                <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{ block: showingNavigationDropdown, hidden: !showingNavigationDropdown }"
-                    class="sm:hidden bg-white border-t border-slate-100"
-                >
-                    <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('notes.index')" :active="route().current('notes.*')">
-                            Notas Rápidas
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('tasks.index')" :active="route().current('tasks.*')">
-                            Calendario
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('settings.index')" :active="route().current('settings.*')">
-                            Ajustes
-                        </ResponsiveNavLink>
-                    </div>
+            <nav class="flex-1 px-4 space-y-2 mt-4">
+                <Link :href="route('dashboard')" 
+                    class="flex items-center gap-3 px-5 py-4 rounded-2xl font-bold transition-all group"
+                    :class="route().current('dashboard') ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'">
+                    <span class="text-xl group-hover:scale-110 transition-transform">🏠</span>
+                    Dashboard
+                </Link>
 
-                    <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-slate-100">
-                        <div class="px-4">
-                            <div class="font-medium text-base text-slate-800">
-                                {{ $page.props.auth.user.name }}
-                            </div>
-                            <div class="font-medium text-sm text-slate-500">{{ $page.props.auth.user.email }}</div>
-                        </div>
+                <Link :href="route('notes.index')" 
+                    class="flex items-center gap-3 px-5 py-4 rounded-2xl font-bold transition-all group"
+                    :class="route().current('notes.*') ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'">
+                    <span class="text-xl group-hover:scale-110 transition-transform">📝</span>
+                    Notas Rápidas
+                </Link>
 
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Mi Perfil </ResponsiveNavLink>
-                            <ResponsiveNavLink :href="route('logout')" method="post" as="button" class="text-red-500">
-                                Cerrar Sesión
-                            </ResponsiveNavLink>
-                        </div>
-                    </div>
-                </div>
+                <Link :href="route('tasks.index')" 
+                    class="flex items-center gap-3 px-5 py-4 rounded-2xl font-bold transition-all group"
+                    :class="route().current('tasks.*') ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'">
+                    <span class="text-xl group-hover:scale-110 transition-transform">📅</span>
+                    Calendario
+                </Link>
+
+                <Link :href="route('settings.index')" 
+                    class="flex items-center gap-3 px-5 py-4 rounded-2xl font-bold transition-all group"
+                    :class="route().current('settings.*') ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'">
+                    <span class="text-xl group-hover:scale-110 transition-transform">⚙️</span>
+                    Ajustes
+                </Link>
             </nav>
 
+            <div class="p-6 border-t border-slate-50">
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] text-center">Version 1.0.0</p>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col min-w-0 min-h-screen">
+            <!-- Mobile Header -->
+            <header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-100 dark:border-slate-800 md:hidden">
+                <div class="flex items-center justify-between h-16 px-6">
+                    <Link :href="route('dashboard')" class="bg-indigo-600 p-1.5 rounded-xl">
+                        <ApplicationLogo class="h-6 w-auto fill-current text-white" />
+                    </Link>
+                    
+                    <button @click="showingNavigationDropdown = !showingNavigationDropdown" 
+                        class="p-2 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path :class="{'hidden': showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path :class="{'hidden': !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div v-show="showingNavigationDropdown" class="border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
+                    <div class="p-4 space-y-1">
+                        <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">Dashboard</ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('notes.index')" :active="route().current('notes.*')">Notas Rápidas</ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('tasks.index')" :active="route().current('tasks.*')">Calendario</ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('settings.index')" :active="route().current('settings.*')">Ajustes</ResponsiveNavLink>
+                    </div>
+                    <div class="p-4 border-t border-slate-100 dark:border-slate-800">
+                        <div class="px-4 mb-4">
+                            <div class="font-bold text-slate-900 dark:text-white">{{ $page.props.auth.user.name }}</div>
+                            <div class="text-xs text-slate-500 dark:text-slate-400">{{ $page.props.auth.user.email }}</div>
+                        </div>
+                        <ResponsiveNavLink :href="route('profile.edit')">Mi Perfil</ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('logout')" method="post" as="button" class="text-rose-500 font-bold">Cerrar Sesión</ResponsiveNavLink>
+                    </div>
+                </div>
+            </header>
+
             <!-- Page Heading -->
-            <header class="" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+            <header class="pt-10 pb-6" v-if="$slots.header">
+                <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 dark:text-white">
                     <slot name="header" />
                 </div>
             </header>
 
             <!-- Page Content -->
-            <main>
-                <slot />
+            <main class="flex-1">
+                <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 pb-12">
+                    <slot />
+                </div>
             </main>
         </div>
     </div>

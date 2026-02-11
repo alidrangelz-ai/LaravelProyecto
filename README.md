@@ -1,34 +1,53 @@
-# Bloc de Notas Personal (Laravel + Vue + Inertia)
+# BlocApp - Bloc de Notas Boutique (Laravel + Vue + Inertia)
 
-Este proyecto es una aplicación web de un bloc de notas personal organizado, desarrollado con Laravel 10, Vue.js 3, Inertia.js y Tailwind CSS.
+Este proyecto es una aplicación web de gestión personal moderna y minimalista, desarrollada con **Laravel 10**, **Vue.js 3**, **Inertia.js** y **Tailwind CSS**. Se enfoca en una experiencia de usuario fluida con una estética "Boutique White".
 
-## Estado Actual del Proyecto
+## ✨ Características Recientes (Actualización UI/UX)
 
-### 1. Configuración Inicial del Entorno
-- Se ha creado el proyecto Laravel utilizando la versión ^10.0.
-- Se ha configurado el entorno de desarrollo para utilizar **SQLite** como base de datos, eliminando la dependencia de MySQL y simplificando la configuración local.
-- Se ha creado el archivo de base de datos vacío `database/database.sqlite`.
+### 🎨 Estética "Boutique White"
+- Interfaz limpia con fondos blancos suaves, bordes muy redondeados (`rounded-[2rem]`), sombras sutiles y tipografía optimizada para lectura prolongada.
+- Navegación **Sidebar fija** en escritorio para un flujo de trabajo profesional y cabecera colapsable moderna en móviles.
 
-### 2. Instalación de Dependencias
-- Se ha instalado **Laravel Breeze** (`laravel/breeze`) para proporcionar la autenticación y el andamiaje inicial con Vue.js y Inertia.
-- Las dependencias de Node.js (Vite, Vue, Tailwind) están listas para ser instaladas y compiladas.
+### 🌗 Modo Oscuro Nativo
+- Sistema de temas (Claro/Oscuro) integrado con persistencia en el navegador (`localStorage`).
+- Transiciones suaves entre temas y soporte completo en todos los módulos (Dashboard, Notas, Calendario, Ajustes).
+- Inyección temprana de script para evitar el parpadeo blanco al cargar la página.
 
-## Módulos Desarrollados
+### ⚙️ Centro de Configuración Unificado
+- Se ha rediseñado el módulo de **Ajustes** para actuar como centro de control.
+- **Gestión de Usuario**: El acceso al perfil y cierre de sesión se han migrado del panel lateral al módulo de Ajustes para una interfaz más despejada.
+- **Preferencias de Apariencia**: Interruptor visual para cambiar el modo de color.
 
-El sistema cuenta con los siguientes módulos operativos:
+## 📦 Estado del Proyecto y Tecnologías
 
-1.  **Menú Principal (Dashboard)**: Visualización de estadísticas generales (Total de notas, Notas destacadas, Tareas pendientes y completadas).
-2.  **Notas Rápidas**: CRUD completo para gestionar notas personales. Permite crear, editar, eliminar y fijar notas destacadas, con selección de color de fondo.
-3.  **Calendario de Tareas**: Interface para organizar tareas con fechas, permitiendo marcarlas como completadas.
-4.  **Configuraciones del Sistema**: Formulario para ajustar preferencias de la aplicación (como título del sitio, tema, etc.).
+### Arquitectura
+- **Backend**: Laravel 10 con SQLite (cero configuración de base de datos externa).
+- **Frontend**: Vue.js 3 (Composition API) + Inertia.js (SPA feel).
+- **Estilos**: Tailwind CSS 3 con configuraciones personalizadas para el modo oscuro y componentes reutilizables (`card-white`, `btn-primary`).
 
-## Próximos Pasos
+### Módulos Operativos
+1.  **Dashboard**: Resumen visual con estadísticas dinámicas y diseño adaptativo.
+2.  **Notas Rápidas**: CRUD con "stickers" de colores, opción de destacar (Pin) y visualización en cuadrícula.
+3.  **Calendario de Tareas**: Vista mensual intuitiva para gestionar fechas límite y estados de tareas.
+4.  **Ajustes**: Gestión de metadatos del sitio, cuenta de usuario y personalización estética.
 
-El proyecto está configurado y funcional. Para probarlo:
+## 🚀 Instalación y Uso
 
-1.  Asegúrate de ejecutar las migraciones si no lo has hecho: `php artisan migrate`.
-2.  Inicia el servidor backend: `php artisan serve`.
-3.  Inicia el servidor frontend (Vite): `npm run dev`.
-4.  Accede a `http://localhost:8000`.
+1.  **Clonar y configurar**:
+    ```bash
+    composer install
+    npm install
+    cp .env.example .env
+    php artisan key:generate
+    ```
+2.  **Base de Datos**:
+    ```bash
+    # Asegúrate de tener database/database.sqlite creado
+    php artisan migrate --seed
+    ```
+3.  **Ejecución**:
+    - Backend: `php artisan serve`
+    - Frontend: `npm run dev` o `npm run build`
 
-¡La aplicación está lista para usar!
+---
+*Desarrollado con ❤️ para una organización personal sin distracciones.*

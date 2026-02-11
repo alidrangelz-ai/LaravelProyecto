@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply bg-[#f8fafc] text-slate-800 antialiased;
+        @apply bg-[#f8fafc] text-slate-800 antialiased transition-colors duration-300 dark:bg-slate-950 dark:text-slate-100;
     }
 }
 
@@ -12,13 +12,13 @@
     .btn-primary {
         @apply px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-2xl transition-all shadow-md hover:shadow-lg active:scale-95;
     }
-    
+
     .card-white {
-        @apply bg-white border border-slate-100 rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6;
+        @apply bg-white border border-slate-100 rounded-[2rem] shadow-xl p-6 transition-all duration-300 dark:bg-slate-900 dark:border-slate-800 dark:shadow-none;
     }
 
     .input-friendly {
-        @apply bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-indigo-400 rounded-xl px-4 py-2 transition-all;
+        @apply bg-slate-50 border-none ring-1 ring-slate-200 focus:ring-2 focus:ring-indigo-400 rounded-xl px-4 py-2 transition-all dark:bg-slate-800 dark:ring-slate-700 dark:text-white;
     }
 }
 
@@ -26,9 +26,11 @@
 ::-webkit-scrollbar {
     width: 8px;
 }
+
 ::-webkit-scrollbar-track {
     @apply bg-transparent;
 }
+
 ::-webkit-scrollbar-thumb {
     @apply bg-slate-200 rounded-full hover:bg-slate-300;
 }
